@@ -1,0 +1,30 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: taskflow-backend
+
+  # 資料庫連線設定 (對應 docker-compose.yml 中的 MySQL 8.0)
+  datasource:
+    url: jdbc:mysql://localhost:3306/taskflow_db?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Taipei&characterEncoding=utf8
+    username: taskflow_user
+    password: taskflow_password
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  # JPA / Hibernate 設定
+  jpa:
+    hibernate:
+      # update: 當 Entity 有變更時，自動更新 MySQL 資料表結構（開發階段最方便）
+      ddl-auto: update
+    # 在 Console 印出 Hibernate 實際執行的 SQL，方便學習與除錯
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+# Swagger UI 設定 (啟動後可開啟 http://localhost:8080/swagger-ui.html)
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    operations-sorter: method
